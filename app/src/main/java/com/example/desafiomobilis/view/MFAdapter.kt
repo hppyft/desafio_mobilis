@@ -1,26 +1,26 @@
 package com.example.desafiomobilis.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.desafiomobilis.databinding.DespesaItemBinding
+import com.example.desafiomobilis.databinding.MfItemBinding
 import com.example.desafiomobilis.model.Despesa
+import com.example.desafiomobilis.model.MovimentacaoFinanceira
 import com.example.desafiomobilis.util.setSafeOnClickListener
 import com.example.desafiomobilis.util.toFormattedString
 import com.example.desafiomobilis.util.toReal
 
-class DespesaAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
-    RecyclerView.Adapter<DespesaAdapter.ViewHolder>() {
+class MFAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
+    RecyclerView.Adapter<MFAdapter.ViewHolder>() {
 
-    private var mList: List<Despesa> = listOf()
+    private var mList: List<MovimentacaoFinanceira> = listOf()
 
-    class ViewHolder(val mBinding: DespesaItemBinding) : RecyclerView.ViewHolder(mBinding.root)
+    class ViewHolder(val mBinding: MfItemBinding) : RecyclerView.ViewHolder(mBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflator = LayoutInflater.from(parent.context)
-        val binding = DespesaItemBinding.inflate(layoutInflator, parent, false)
+        val binding = MfItemBinding.inflate(layoutInflator, parent, false)
         return ViewHolder(binding)
     }
 
@@ -31,7 +31,8 @@ class DespesaAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
         holder.mBinding.data = item.data?.toFormattedString()
         holder.mBinding.valor = item.valor?.toReal()
         holder.mBinding.descricao = item.descricao
-        holder.mBinding.pago = if (item.pago != null && item.pago!!) "Pago" else "Não Pago" //TODO
+        holder.mBinding.efetuado =
+            if (item.efetuado != null && item.efetuado!!) item.getEfetuadoString() else item.getNaoEfetuadoString()
         holder.mBinding.moreOptions.setSafeOnClickListener {
             item.id?.let { id ->
                 mOnMoreOptionsClicked(id, it)
@@ -39,7 +40,7 @@ class DespesaAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
         }
     }
 
-    fun setList(list: List<Despesa>) {
+    fun setList(list: List<MovimentacaoFinanceira>) {
         mList = list
         notifyDataSetChanged()
     }

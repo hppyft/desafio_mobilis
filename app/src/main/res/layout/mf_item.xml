@@ -18,7 +18,7 @@
             type="String" />
 
         <variable
-            name="pago"
+            name="efetuado"
             type="String" />
     </data>
 
@@ -26,7 +26,7 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorPrimaryLight"
         android:padding="@dimen/field_to_field_margin">
 
         <TextView
@@ -83,6 +83,7 @@
         <ImageButton
             android:id="@+id/more_options"
             android:layout_width="wrap_content"
+            android:background="@color/colorPrimaryLight"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_more_vert_24"
             app:layout_constraintRight_toRightOf="parent"
@@ -118,7 +119,7 @@
             android:id="@+id/pago_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{pago}"
+            android:text="@{efetuado}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/textColorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"

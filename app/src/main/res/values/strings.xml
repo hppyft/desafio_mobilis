@@ -1,26 +1,42 @@
 <resources>
-    <string name="app_name">DesafioMobilis</string>
+    <string name="app_name">Desafio Mobilis</string>
+
+    <!--  LoginView  -->
     <string name="logar">Logar</string>
     <string name="login">LOGIN</string>
-    <string name="criar">Criar nova despesa</string>
+
+    <!--  ResumoView  -->
+    <string name="despesas_tab_title">Despesas</string>
+    <string name="receitas_tab_title">Receitas</string>
+    <string name="criar">Criar nova movimentação financeira</string>
     <string name="data_label">Data:</string>
     <string name="valor_label">Valor:</string>
     <string name="descricao_label">Descrição:</string>
+    <string name="resumo_activity_title">Resumo</string>
+    <string name="refresh_button_content_description">refresh button</string>
+    <string name="more_options_content_description">more options</string>
+    <string name="error_get_despesa_list_text">Ocorreu um erro ao resgatar lista de despesas</string>
+    <string name="error_get_receita_list_text">Ocorreu um erro ao resgatar lista de receitas</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="remover">Remover</string>
 
-<!--  CriarView  -->
+    <!--  CriarView  -->
     <string name="criar_view_nova_despesa_title">Criação de Despesa</string>
     <string name="criar_view_alteracao_despesa_title">Alteração de Despesa</string>
+    <string name="criar_view_nova_receita_title">Criação de Receita</string>
+    <string name="criar_view_alteracao_receita_title">Alteração de Receita</string>
     <string name="data_hint">Insira a data</string>
     <string name="valor_hint">Insira o valor</string>
     <string name="descricao_hint">Insira a descrição</string>
-
     <string name="pago_label">Pago</string>
     <string name="nao_pago_label">Não Pago</string>
-    <string name="resumo_activity_title">Resumo</string>
+    <string name="recebido_label">Recebido</string>
+    <string name="nao_recebido_label">Não Recebido</string>
     <string name="finalizar">Finalizar</string>
-    <string name="refresh_button_content_description">Refresh button</string>
-    <string name="error_get_list_text">Ocorreu um erro ao resgatar lista de despesas</string>
-    <string name="more_options_content_description">more options</string>
-    <string name="atualizar">Atualizar</string>
-    <string name="remover">Remover</string>
+
+    <!--  GraficoView  -->
+    <string name="erro_grafico">Ocorreu um erro ao resgatar valores para os gráficos</string>
+    <string name="empty_list_text">Esta lista está vazia, experimente adicionar algo clicando no botão abaixo</string>
+
+
 </resources>

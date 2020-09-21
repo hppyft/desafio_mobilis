@@ -10,14 +10,22 @@
             type="String" />
 
         <variable
-            name="despesa"
-            type="com.example.desafiomobilis.model.Despesa" />
+            name="efetuadoLabel"
+            type="String" />
+
+        <variable
+            name="naoEfetuadoLabel"
+            type="String" />
+
+        <variable
+            name="mf"
+            type="com.example.desafiomobilis.model.MovimentacaoFinanceira" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorPrimaryLight"
         android:padding="@dimen/field_to_field_margin">
 
         <TextView
@@ -26,6 +34,7 @@
             android:layout_height="wrap_content"
             android:inputType="none"
             android:text="@{title}"
+            android:textColor="@color/textColorOnPrimary"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -113,7 +122,7 @@
             android:layout_marginStart="@dimen/label_to_value_margin"
             android:layout_marginTop="@dimen/field_to_field_margin"
             android:hint="@string/descricao_hint"
-            android:text="@={despesa.descricao}"
+            android:text="@={mf.descricao}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/textColorOnPrimary"
             app:layout_constraintHorizontal_bias="0"
@@ -141,14 +150,18 @@
                 android:id="@+id/pago_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pago_label" />
+                android:text="@{efetuadoLabel}"
+                android:textColor="@color/textColorOnPrimary"
+                tools:text="pago" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/nao_pago_rb"
                 android:layout_width="wrap_content"
+                android:textColor="@color/textColorOnPrimary"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/field_to_field_margin"
-                android:text="@string/nao_pago_label" />
+                android:text="@{naoEfetuadoLabel}"
+                tools:text="nao pago" />
         </RadioGroup>
 
         <Button
@@ -156,6 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/field_to_field_margin"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/finalizar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
