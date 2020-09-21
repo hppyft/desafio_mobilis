@@ -23,9 +23,7 @@ object DespesaRepository {
             .addOnSuccessListener {
                 success()
             }
-            .addOnFailureListener {
-                failure(it)
-            }
+            .addOnFailureListener (failure)
     }
 
     fun update(despesa: Despesa, success: () -> Unit, failure: (Exception) -> Unit) {
@@ -37,9 +35,7 @@ object DespesaRepository {
             .addOnSuccessListener {
                 success()
             }
-            .addOnFailureListener {
-                failure(it)
-            }
+            .addOnFailureListener (failure)
     }
 
     fun getAll(success: (List<Despesa>) -> Unit, failure: (Exception) -> Unit) {
@@ -50,9 +46,7 @@ object DespesaRepository {
             .addOnSuccessListener {
                 success(it.toObjects(Despesa::class.java))
             }
-            .addOnFailureListener {
-                failure(it)
-            }
+            .addOnFailureListener (failure)
     }
 
     fun getById(despesaId: String, success: (Despesa?) -> Unit, failure: (Exception) -> Unit) {
@@ -64,8 +58,16 @@ object DespesaRepository {
             .addOnSuccessListener {
                 success(it.toObject(Despesa::class.java))
             }
-            .addOnFailureListener {
-                failure(it)
+            .addOnFailureListener (failure)
+    }
+
+    fun delete(despesaId: String, success: () -> Unit, failure: (Exception) -> Unit) {
+        db.collection(Collection)
+            .document(despesaId)
+            .delete()
+            .addOnSuccessListener {
+                success()
             }
+            .addOnFailureListener (failure)
     }
 }

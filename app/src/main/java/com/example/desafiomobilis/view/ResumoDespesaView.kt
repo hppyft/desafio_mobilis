@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -50,12 +51,8 @@ class ResumoDespesaView : Fragment() {
     }
 
     private fun setupList() {
-        val adapter = DespesaAdapter { id ->
-            mViewModel.onAlterarClicked {
-                navigate(
-                    CriarActivity::class.java,
-                    Bundle().apply { putString(CriarView.DESPESA_ID_KEY, id) })
-            }
+        val adapter = DespesaAdapter { id, view ->
+            openPopupMenu(id, view)
         }
         mBinding.list.adapter = adapter
         val dividerItemDecoration = DividerItemDecoration(
@@ -70,20 +67,47 @@ class ResumoDespesaView : Fragment() {
         }
     }
 
-    private fun setupError() {
-        mBinding.reloadBtn.setSafeOnClickListener {
-            mBinding.errorGroup.visibility = View.GONE
-            mBinding.loading.visibility = View.VISIBLE
-            mViewModel.load()
+    private fun openPopupMenu(id: String, view: View) {
+        activity?.let {
+            var popup = PopupMenu(it, view)
+            popup.menuInflater.inflate(R.menu.despesa_item_menu, popup.menu)
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.atualizar_menu_option -> {
+                        mViewModel.onAlterarClicked {
+                            mViewModel.onAlterarClicked {
+                                navigate(
+                                    CriarActivity::class.java,
+                                    Bundle().apply { putString(CriarView.DESPESA_ID_KEY, id) })
+                            }
+                        }
+                    }
+                    R.id.remover_menu_option -> {
+                        mBinding.list.visibility = View.GONE
+                        mBinding.loading.visibility = View.VISIBLE
+                        mViewModel.onRemoverClicked(id)
+                    }
+                }
+                true
+            }
+            popup.show()
         }
-        mViewModel.getError().observe(viewLifecycleOwner) {
-            when (it) {
-                ResumoViewModel.ERROR_GET_LIST -> {
-                    mBinding.errorText = getString(R.string.error_get_list_text)
-                    mBinding.list.visibility = View.GONE
-                    mBinding.errorGroup.visibility = View.VISIBLE
+    }
+
+        private fun setupError() {
+            mBinding.reloadBtn.setSafeOnClickListener {
+                mBinding.errorGroup.visibility = View.GONE
+                mBinding.loading.visibility = View.VISIBLE
+                mViewModel.load()
+            }
+            mViewModel.getError().observe(viewLifecycleOwner) {
+                when (it) {
+                    ResumoViewModel.ERROR_GET_LIST -> {
+                        mBinding.errorText = getString(R.string.error_get_list_text)
+                        mBinding.list.visibility = View.GONE
+                        mBinding.errorGroup.visibility = View.VISIBLE
+                    }
                 }
             }
         }
     }
-}

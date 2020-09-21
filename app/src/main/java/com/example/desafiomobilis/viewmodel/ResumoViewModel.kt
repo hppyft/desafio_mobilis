@@ -1,5 +1,7 @@
 package com.example.desafiomobilis.viewmodel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.desafiomobilis.model.Despesa
 import com.example.desafiomobilis.repository.DespesaRepository
@@ -14,7 +16,7 @@ class ResumoViewModel : ViewModel(), LifecycleObserver {
     private val mError = MutableLiveData<Int>().apply { value = -1 }
 
     fun getDespesaList(): LiveData<List<Despesa>> = mDespesaList
-    fun getError():LiveData<Int> = mError
+    fun getError(): LiveData<Int> = mError
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun onResume() {
@@ -35,5 +37,13 @@ class ResumoViewModel : ViewModel(), LifecycleObserver {
 
     fun onAlterarClicked(startActivity: () -> Unit) {
         startActivity()
+    }
+
+    fun onRemoverClicked(id: String) {
+        DespesaRepository.delete(id, {
+            load()
+        }, {
+            Log.d(TAG, "Ocorreu erro ao deletar despesa $id")
+        })
     }
 }

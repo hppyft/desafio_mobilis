@@ -20,4 +20,7 @@
     <string name="finalizar">Finalizar</string>
     <string name="refresh_button_content_description">Refresh button</string>
     <string name="error_get_list_text">Ocorreu um erro ao resgatar lista de despesas</string>
+    <string name="more_options_content_description">more options</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="remover">Remover</string>
 </resources>

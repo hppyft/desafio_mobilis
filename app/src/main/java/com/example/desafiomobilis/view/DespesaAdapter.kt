@@ -1,6 +1,8 @@
 package com.example.desafiomobilis.view
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafiomobilis.databinding.DespesaItemBinding
@@ -9,7 +11,8 @@ import com.example.desafiomobilis.util.setSafeOnClickListener
 import com.example.desafiomobilis.util.toFormattedString
 import com.example.desafiomobilis.util.toReal
 
-class DespesaAdapter(val mOnItemClick:(String) -> Unit) : RecyclerView.Adapter<DespesaAdapter.ViewHolder>() {
+class DespesaAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
+    RecyclerView.Adapter<DespesaAdapter.ViewHolder>() {
 
     private var mList: List<Despesa> = listOf()
 
@@ -29,9 +32,9 @@ class DespesaAdapter(val mOnItemClick:(String) -> Unit) : RecyclerView.Adapter<D
         holder.mBinding.valor = item.valor?.toReal()
         holder.mBinding.descricao = item.descricao
         holder.mBinding.pago = if (item.pago != null && item.pago!!) "Pago" else "Não Pago" //TODO
-        holder.mBinding.background.setSafeOnClickListener {
-            item.id?.let{
-                mOnItemClick(it)
+        holder.mBinding.moreOptions.setSafeOnClickListener {
+            item.id?.let { id ->
+                mOnMoreOptionsClicked(id, it)
             }
         }
     }
