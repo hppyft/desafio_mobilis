@@ -47,7 +47,7 @@ package com.example.desafiomobilis.viewmodel
 //
 //    private fun calculate(despesas: List<Despesa>, receitas: List<Receita>) {
 //        val entries = mutableListOf<PieEntry>()
-////        entries.add() //TODO
+////        entries.add()
 //        val dataSet = PieDataSet(entries, "Saldos")
 //        val data = PieData(dataSet)
 //        mData.postValue(data)

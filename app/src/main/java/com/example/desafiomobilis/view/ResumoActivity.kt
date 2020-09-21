@@ -1,5 +1,6 @@
 package com.example.desafiomobilis.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,14 +19,14 @@ class ResumoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resumo)
-        mPagerAdapter = MFPagerAdapter(supportFragmentManager)
+        mPagerAdapter = MFPagerAdapter(this,supportFragmentManager)
         mViewPager = findViewById(R.id.pager)
         mViewPager.adapter = mPagerAdapter
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         tabLayout.setupWithViewPager(mViewPager)
     }
 
-    class MFPagerAdapter(fm: FragmentManager) :
+    class MFPagerAdapter(val mContext:Context,fm: FragmentManager) :
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return when (position) {
@@ -38,9 +39,9 @@ class ResumoActivity : AppCompatActivity() {
 
         override fun getPageTitle(position: Int): CharSequence? {
             return when (position) {
-                0 -> "Despesas" //TODO
-                1 -> "Receitas" //TODO
-//                2 -> "Gráficos" //TODO
+                0 -> mContext.getString(R.string.despesas_tab_title)
+                1 -> mContext.getString(R.string.receitas_tab_title)
+//                2 -> "Gráficos"
                 else -> throw Exception("No fragment for this id")
             }
         }

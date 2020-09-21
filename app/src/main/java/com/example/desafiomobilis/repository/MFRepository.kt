@@ -45,7 +45,7 @@ abstract class MFRepository<T : MovimentacaoFinanceira> {
         DespesaRepository.db.collection(
             getCollection()
         )
-            .orderBy("data", Query.Direction.ASCENDING                                     ) //TODO
+            .orderBy("data", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener {
                 success(it.toObjects(getClassToken()))

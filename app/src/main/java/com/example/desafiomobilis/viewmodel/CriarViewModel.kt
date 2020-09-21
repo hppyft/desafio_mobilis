@@ -26,13 +26,13 @@ abstract class CriarViewModel<T:MovimentacaoFinanceira> : ViewModel() {
             getRepository().update(mf, {
                 Log.d(TAG, "Despesa atualizada com sucesso")
             }, {
-                Log.d(TAG, "Erro ao adicionar despesa") //TODO
+                Log.d(TAG, "Erro ao adicionar mf")
             })
         } else{
             getRepository().add(mf, {
                 Log.d(TAG, "Despesa adicionada com sucesso")
             }, {
-                Log.d(TAG, "Erro ao adicionar despesa") //TODO
+                Log.d(TAG, "Erro ao adicionar mf")
             })
         }
         finishActivity()
@@ -50,7 +50,7 @@ abstract class CriarViewModel<T:MovimentacaoFinanceira> : ViewModel() {
         getRepository().getById(id, {
             mMF.postValue(it)
         }, {
-            Log.d(TAG, "Erro ao resgatar despesa") //TODO
+            Log.d(TAG, "Erro ao resgatar mf")
         })
     }
 }
