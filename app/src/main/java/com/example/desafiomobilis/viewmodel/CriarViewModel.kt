@@ -6,26 +6,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.desafiomobilis.model.Despesa
+import com.example.desafiomobilis.model.MovimentacaoFinanceira
 import com.example.desafiomobilis.repository.DespesaRepository
+import com.example.desafiomobilis.repository.MFRepository
 
-class CriarViewModel : ViewModel() {
+abstract class CriarViewModel<T:MovimentacaoFinanceira> : ViewModel() {
 
-    private val mDespesa = MutableLiveData<Despesa?>()
+    abstract fun getRepository():MFRepository<T>
 
-    fun getDespesa():LiveData<Despesa?> = mDespesa
+    private val mMF = MutableLiveData<T?>()
+
+    fun getMF():LiveData<T?> = mMF
 
     fun onFinalizarClicked(
-        despesa: Despesa,
+        mf: T,
         finishActivity: () -> Unit
     ) {
-        if (despesa.id != null){
-            DespesaRepository.update(despesa, {
+        if (mf.id != null){
+            getRepository().update(mf, {
                 Log.d(TAG, "Despesa atualizada com sucesso")
             }, {
                 Log.d(TAG, "Erro ao adicionar despesa") //TODO
             })
         } else{
-            DespesaRepository.add(despesa, {
+            getRepository().add(mf, {
                 Log.d(TAG, "Despesa adicionada com sucesso")
             }, {
                 Log.d(TAG, "Erro ao adicionar despesa") //TODO
@@ -43,8 +47,8 @@ class CriarViewModel : ViewModel() {
     }
 
     private fun load(id: String) {
-        DespesaRepository.getById(id, {
-            mDespesa.postValue(it)
+        getRepository().getById(id, {
+            mMF.postValue(it)
         }, {
             Log.d(TAG, "Erro ao resgatar despesa") //TODO
         })

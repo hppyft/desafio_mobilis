@@ -8,38 +8,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.example.desafiomobilis.*
 import com.example.desafiomobilis.databinding.CriarViewBinding
-import com.example.desafiomobilis.model.Despesa
+import com.example.desafiomobilis.model.MovimentacaoFinanceira
 import com.example.desafiomobilis.util.setSafeOnClickListener
 import com.example.desafiomobilis.util.toFormattedString
 import com.example.desafiomobilis.viewmodel.CriarViewModel
 import java.util.*
 
-class CriarView() : Fragment() {
+abstract class CriarView<T : MovimentacaoFinanceira> : Fragment() {
+
+    abstract fun getMF(): T
+    abstract fun getViewModel(): CriarViewModel<T>
+    abstract fun getTitle(): String
+    abstract fun getEfetuadoLabel(): String
+    abstract fun getNaoEfetuadoLabel(): String
 
     companion object {
-        const val DESPESA_ID_KEY = "com.example.desafiomobilis.CriacaoView.DESPESA_ID_KEY"
+        const val MF_ID_KEY = "com.example.desafiomobilis.CriacaoView.MF_ID_KEY"
+        const val MF_KEY = "com.example.desafiomobilis.CriacaoView.MF_KEY"
 
-        @JvmStatic
-        fun getInstance(despesaId: String): CriarView {
-            return CriarView().apply {
-                arguments = Bundle().apply {
-                    putString(DESPESA_ID_KEY, despesaId)
-                }
-            }
-        }
+        const val DESPESA = 1
+        const val RECEITA = 2
     }
 
-    private val mViewModel: CriarViewModel by viewModels()
     private lateinit var mBinding: CriarViewBinding
-    private var mId: String? = null
+    protected var mId: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mId = arguments?.getString(DESPESA_ID_KEY)
+        mId = arguments?.getString(MF_ID_KEY)
     }
 
     override fun onCreateView(
@@ -48,8 +46,9 @@ class CriarView() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setupBinding()
-        mViewModel.onIdLoaded(mId) { fillIn() }
+        getViewModel().onIdLoaded(mId) { fillIn() }
         setupTitle()
+        setupLabels()
         setupBtn()
         setupValores()
         return mBinding.root
@@ -61,17 +60,19 @@ class CriarView() : Fragment() {
     }
 
     private fun setupTitle() {
-        mBinding.title =
-            if (mId != null) getString(R.string.criar_view_alteracao_despesa_title) else getString(
-                R.string.criar_view_nova_despesa_title
-            )
+        mBinding.title = getTitle()
+    }
+
+    private fun setupLabels() {
+        mBinding.efetuadoLabel = getEfetuadoLabel()
+        mBinding.naoEfetuadoLabel = getNaoEfetuadoLabel()
     }
 
     private fun setupBtn() {
         mBinding.finalizarBtn.setSafeOnClickListener {
             fillOut()
-            mViewModel.onFinalizarClicked(
-                mBinding.despesa!!
+            getViewModel().onFinalizarClicked(
+                mf = mBinding.mf as T
             ) {
                 activity?.finish()
             }
@@ -79,21 +80,21 @@ class CriarView() : Fragment() {
     }
 
     private fun fillOut() {
-        mBinding.despesa?.valor = mBinding.valorValue.text.toString().toDouble()
-        mBinding.despesa?.pago = mBinding.pagoRb.isChecked
+        mBinding.mf?.valor = mBinding.valorValue.text.toString().toDouble()
+        mBinding.mf?.efetuado = mBinding.pagoRb.isChecked
     }
 
     private fun setupValores() {
-        mViewModel.getDespesa().observe(viewLifecycleOwner) {
+        getViewModel().getMF().observe(viewLifecycleOwner) {
             fillIn(it)
         }
     }
 
-    private fun fillIn(despesa: Despesa? = Despesa()) {
-        mBinding.despesa = despesa ?: Despesa()
+    private fun fillIn(mf: T? = getMF()) {
+        mBinding.mf = mf ?: getMF()
         setupDatepicker()
-        if (despesa?.valor!= null) mBinding.valorValue.setText(despesa.valor.toString())
-        when(despesa?.pago){
+        if (mf?.valor != null) mBinding.valorValue.setText(mf.valor.toString())
+        when (mf?.efetuado) {
             true -> mBinding.pagoRb.isChecked = true
             false, null -> mBinding.naoPagoRb.isChecked = true
         }
@@ -101,12 +102,14 @@ class CriarView() : Fragment() {
 
     private fun setupDatepicker() {
         mBinding.dataValue.inputType = InputType.TYPE_NULL
-        if (mBinding.despesa?.data != null) mBinding.dataValue.setText(mBinding.despesa?.data?.toFormattedString() ?: "")
+        if (mBinding.mf?.data != null) mBinding.dataValue.setText(
+            mBinding.mf?.data?.toFormattedString() ?: ""
+        )
         mBinding.dataValue.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 activity?.let {
                     val defaultCalendar = Calendar.getInstance()
-                    defaultCalendar.time = mBinding.despesa?.data ?: Date()
+                    defaultCalendar.time = mBinding.mf?.data ?: Date()
                     val yearDefault = defaultCalendar.get(Calendar.YEAR)
                     val monthDefault = defaultCalendar.get(Calendar.MONTH)
                     val dayDefault = defaultCalendar.get(Calendar.DAY_OF_MONTH)
@@ -117,9 +120,9 @@ class CriarView() : Fragment() {
                             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                             calendar.set(Calendar.MONTH, month)
                             calendar.set(Calendar.YEAR, year)
-                            mBinding.despesa?.data = Date(calendar.timeInMillis)
+                            mBinding.mf?.data = Date(calendar.timeInMillis)
                             mBinding.dataValue.setText(
-                                mBinding.despesa?.data?.toFormattedString() ?: ""
+                                mBinding.mf?.data?.toFormattedString() ?: ""
                             )
                         },
                         yearDefault, monthDefault, dayDefault

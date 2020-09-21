@@ -41,7 +41,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/criar_btn"
             tools:itemCount="20"
-            tools:listitem="@layout/despesa_item"/>
+            tools:listitem="@layout/mf_item"/>
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/error_group"
