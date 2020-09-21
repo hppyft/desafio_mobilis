@@ -10,20 +10,8 @@
             type="String" />
 
         <variable
-            name="data"
-            type="String" />
-
-        <variable
-            name="valor"
-            type="String" />
-
-        <variable
-            name="descricao"
-            type="String" />
-
-        <variable
-            name="pago"
-            type="androidx.databinding.ObservableBoolean" />
+            name="despesa"
+            type="com.example.desafiomobilis.model.Despesa" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,8 +24,8 @@
             android:id="@+id/title_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{title}"
             android:inputType="none"
+            android:text="@{title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -55,7 +43,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/data_value" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/data_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +51,6 @@
             android:layout_marginTop="@dimen/field_to_field_margin"
             android:hint="@string/data_hint"
             android:minWidth="100dp"
-            android:text="@{data}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/textColorOnPrimary"
             app:layout_constraintLeft_toRightOf="@id/data_label"
@@ -94,7 +81,7 @@
             android:layout_marginStart="@dimen/label_to_value_margin"
             android:layout_marginTop="@dimen/field_to_field_margin"
             android:hint="@string/valor_hint"
-            android:text="@{valor}"
+            android:inputType="numberDecimal"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/textColorOnPrimary"
             app:layout_constraintLeft_toRightOf="@id/valor_label"
@@ -126,7 +113,7 @@
             android:layout_marginStart="@dimen/label_to_value_margin"
             android:layout_marginTop="@dimen/field_to_field_margin"
             android:hint="@string/descricao_hint"
-            android:text="@{descricao}"
+            android:text="@={despesa.descricao}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/textColorOnPrimary"
             app:layout_constraintHorizontal_bias="0"
@@ -151,16 +138,16 @@
             app:layout_constraintTop_toBottomOf="@id/descricao_bottom_barrier">
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/pago_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@{pago}"
                 android:text="@string/pago_label" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/nao_pago_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/field_to_field_margin"
-                android:checked="@{!pago}"
                 android:text="@string/nao_pago_label" />
         </RadioGroup>
 
@@ -175,5 +162,4 @@
             app:layout_constraintTop_toBottomOf="@id/pago_rg" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

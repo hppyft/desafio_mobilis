@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1033922447795",
+    "firebase_url": "https://desafio-mobilis.firebaseio.com",
+    "project_id": "desafio-mobilis",
+    "storage_bucket": "desafio-mobilis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033922447795:android:52cc2763d6fec3e7f5a3c6",
+        "android_client_info": {
+          "package_name": "com.example.desafiomobilis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033922447795-c1hteur171ohavj4ak9a6fdivl5c5517.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBVLKve6p_Ti34j3YqoOQfCopJSWe7GNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033922447795-c1hteur171ohavj4ak9a6fdivl5c5517.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

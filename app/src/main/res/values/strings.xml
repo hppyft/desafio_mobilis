@@ -18,4 +18,6 @@
     <string name="nao_pago_label">Não Pago</string>
     <string name="resumo_activity_title">Resumo</string>
     <string name="finalizar">Finalizar</string>
+    <string name="refresh_button_content_description">Refresh button</string>
+    <string name="error_get_list_text">Ocorreu um erro ao resgatar lista de despesas</string>
 </resources>
