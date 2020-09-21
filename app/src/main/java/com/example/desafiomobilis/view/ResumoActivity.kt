@@ -31,6 +31,7 @@ class ResumoActivity : AppCompatActivity() {
             return when (position) {
                 0 -> createResumoDespesaFragment()
                 1 -> createResumoReceitaFragment()
+//                2 -> createGraficoFragment()
                 else -> throw Exception("No fragment for this id")
             }
         }
@@ -39,6 +40,7 @@ class ResumoActivity : AppCompatActivity() {
             return when (position) {
                 0 -> "Despesas" //TODO
                 1 -> "Receitas" //TODO
+//                2 -> "Gráficos" //TODO
                 else -> throw Exception("No fragment for this id")
             }
         }
@@ -50,5 +52,9 @@ class ResumoActivity : AppCompatActivity() {
 
         private fun createResumoReceitaFragment() =
             ResumoReceitaView()
+
+//        private fun createGraficoFragment() =
+//            GraficoView()
+
     }
 }

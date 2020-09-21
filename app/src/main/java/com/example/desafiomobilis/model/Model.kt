@@ -2,8 +2,6 @@ package com.example.desafiomobilis.model
 
 import java.util.*
 
-data class Usuario(val nome: String, val email: String)
-
 abstract class MovimentacaoFinanceira() {
     var id: String? = null
     var valor: Double? = null
@@ -11,8 +9,17 @@ abstract class MovimentacaoFinanceira() {
     var data: Date? = null
     var efetuado: Boolean? = null
     var anexo: String? = null
+
+    abstract fun getEfetuadoString(): String
+    abstract fun getNaoEfetuadoString(): String
 }
 
-class Despesa : MovimentacaoFinanceira()
+class Despesa : MovimentacaoFinanceira() {
+    override fun getEfetuadoString() = "Pago"
+    override fun getNaoEfetuadoString() = "Não Pago"
+}
 
-class Receita : MovimentacaoFinanceira()
+class Receita : MovimentacaoFinanceira() {
+    override fun getEfetuadoString() = "Recebido"
+    override fun getNaoEfetuadoString() = "Não Recebido"
+}

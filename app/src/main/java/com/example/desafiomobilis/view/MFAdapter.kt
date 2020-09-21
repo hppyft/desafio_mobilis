@@ -31,11 +31,8 @@ class MFAdapter(val mOnMoreOptionsClicked: (String, View) -> Unit) :
         holder.mBinding.data = item.data?.toFormattedString()
         holder.mBinding.valor = item.valor?.toReal()
         holder.mBinding.descricao = item.descricao
-        if (item is Despesa){
-            holder.mBinding.pago = if (item.efetuado != null && item.efetuado!!) "Pago" else "Não Pago" //TODO
-        } else{
-            holder.mBinding.pago = if (item.efetuado != null && item.efetuado!!) "Recebido" else "Não Recebido" //TODO
-        }
+        holder.mBinding.efetuado =
+            if (item.efetuado != null && item.efetuado!!) item.getEfetuadoString() else item.getNaoEfetuadoString()
         holder.mBinding.moreOptions.setSafeOnClickListener {
             item.id?.let { id ->
                 mOnMoreOptionsClicked(id, it)

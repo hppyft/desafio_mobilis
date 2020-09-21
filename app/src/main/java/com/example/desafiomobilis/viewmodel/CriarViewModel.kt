@@ -5,10 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.desafiomobilis.model.Despesa
 import com.example.desafiomobilis.model.MovimentacaoFinanceira
-import com.example.desafiomobilis.repository.DespesaRepository
 import com.example.desafiomobilis.repository.MFRepository
+import com.example.desafiomobilis.util.clean
 
 abstract class CriarViewModel<T:MovimentacaoFinanceira> : ViewModel() {
 
@@ -22,6 +21,7 @@ abstract class CriarViewModel<T:MovimentacaoFinanceira> : ViewModel() {
         mf: T,
         finishActivity: () -> Unit
     ) {
+        mf.data?.clean()
         if (mf.id != null){
             getRepository().update(mf, {
                 Log.d(TAG, "Despesa atualizada com sucesso")

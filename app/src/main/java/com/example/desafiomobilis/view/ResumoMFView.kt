@@ -34,6 +34,7 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
         setupCriarButton()
         setupList()
         setupError()
+//        setupChart()
         return mBinding.root
     }
 
@@ -54,11 +55,13 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
 
     private fun setupCriarButton() {
         mBinding.criarBtn.setSafeOnClickListener {
-            getViewModel().onCriarClicked { navigate(
-                CriarActivity::class.java,
-                Bundle().apply {
-                    putInt(CriarView.MF_KEY, getMFTypeKey())
-                }) }
+            getViewModel().onCriarClicked {
+                navigate(
+                    CriarActivity::class.java,
+                    Bundle().apply {
+                        putInt(CriarView.MF_KEY, getMFTypeKey())
+                    })
+            }
         }
     }
 
@@ -125,4 +128,19 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
             }
         }
     }
+
+//    private fun setupChart() {
+//        mBinding.chart.apply {
+//            description.isEnabled = false
+//            centerText = ""
+//
+//        }
+//        getViewModel().getChartData().observe(viewLifecycleOwner) {
+//            it!!.setValueTextSize(14f)
+//            mBinding.chart.data = it
+//            mBinding.chart.invalidate()
+//            mBinding.loading.visibility = View.GONE
+//            mBinding.chart.visibility = View.VISIBLE
+//        }
+//    }
 }

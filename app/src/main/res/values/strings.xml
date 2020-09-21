@@ -32,4 +32,8 @@
     <string name="nao_recebido_label">Não Recebido</string>
     <string name="finalizar">Finalizar</string>
 
+    <!--  GraficoView  -->
+    <string name="erro_grafico">Ocorreu um erro ao resgatar valores para os gráficos</string>
+
+
 </resources>

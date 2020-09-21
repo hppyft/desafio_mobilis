@@ -1,6 +1,7 @@
 package com.example.desafiomobilis.repository
 
 import com.example.desafiomobilis.model.MovimentacaoFinanceira
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
@@ -44,6 +45,7 @@ abstract class MFRepository<T : MovimentacaoFinanceira> {
         DespesaRepository.db.collection(
             getCollection()
         )
+            .orderBy("data", Query.Direction.ASCENDING                                     ) //TODO
             .get()
             .addOnSuccessListener {
                 success(it.toObjects(getClassToken()))

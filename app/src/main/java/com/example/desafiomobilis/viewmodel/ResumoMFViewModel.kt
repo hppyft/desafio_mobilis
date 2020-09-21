@@ -14,11 +14,13 @@ abstract class ResumoMFViewModel<T : MovimentacaoFinanceira> : ViewModel(), Life
         const val ERROR_GET_LIST = 1
     }
 
-    protected val mList = MutableLiveData<List<T>>()
-    protected val mError = MutableLiveData<Int>().apply { value = -1 }
+    private val mList = MutableLiveData<List<T>>()
+    private val mError = MutableLiveData<Int>().apply { value = -1 }
+//    private val mChartData = MutableLiveData<PieData?>()
 
     fun getList(): LiveData<List<T>> = mList
     fun getError(): LiveData<Int> = mError
+//    fun getChartData(): LiveData<PieData?> = mChartData
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun onResume() {
@@ -26,8 +28,30 @@ abstract class ResumoMFViewModel<T : MovimentacaoFinanceira> : ViewModel(), Life
     }
 
     fun load() {
+        loadList()
+    }
+
+//    private fun loadChart(it: List<T>) {
+//        val entries = mutableListOf<PieEntry>()
+//        var totalEfetuados: Double = 0.0
+//        it.filter { it.efetuado != null && it.efetuado!! }.forEach {
+//            totalEfetuados += it.valor!!
+//        }
+//        entries.add(PieEntry(totalEfetuados.toFloat(), it[0].getEfetuadoString()))
+//        var totalNaoEfetuados: Double = 0.0
+//        it.filter { it.efetuado != null && !it.efetuado!! }.forEach {
+//            totalNaoEfetuados += it.valor!!
+//        }
+//        entries.add(PieEntry(totalNaoEfetuados.toFloat(), it[0].getNaoEfetuadoString()))
+//        val dataSet = PieDataSet(entries, "Saldo")
+//        val data = PieData(dataSet)
+//        mChartData.postValue(data)
+//    }
+
+    private fun loadList() {
         getRepository().getAll({
             mList.postValue(it)
+//            loadChart(it)
         }, {
             mError.postValue(ERROR_GET_LIST)
         })
