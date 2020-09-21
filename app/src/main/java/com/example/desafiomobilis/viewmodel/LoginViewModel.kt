@@ -1,4 +1,4 @@
-package com.example.desafiomobilis
+package com.example.desafiomobilis.viewmodel
 
 import androidx.lifecycle.ViewModel
 
