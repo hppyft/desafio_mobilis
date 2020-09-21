@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="data"
+            type="String" />
+
+        <variable
+            name="valor"
+            type="String" />
+
+        <variable
+            name="descricao"
+            type="String" />
+
+        <variable
+            name="pago"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/field_to_field_margin">
+
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{title}"
+            android:inputType="none"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Criação de Despesa" />
+
+        <TextView
+            android:id="@+id/data_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/data_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/data_value"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/data_value" />
+
+        <EditText
+            android:id="@+id/data_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_to_value_margin"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:hint="@string/data_hint"
+            android:minWidth="100dp"
+            android:text="@{data}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintLeft_toRightOf="@id/data_label"
+            app:layout_constraintTop_toBottomOf="@id/title_label" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/data_bottom_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="data_label,data_value" />
+
+        <TextView
+            android:id="@+id/valor_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/valor_value"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/valor_value" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/valor_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_to_value_margin"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:hint="@string/valor_hint"
+            android:text="@{valor}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintLeft_toRightOf="@id/valor_label"
+            app:layout_constraintTop_toBottomOf="@id/data_bottom_barrier" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/valor_bottom_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="valor_label,valor_value" />
+
+        <TextView
+            android:id="@+id/descricao_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:text="@string/descricao_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/descricao_value"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/descricao_value" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/descricao_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_to_value_margin"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:hint="@string/descricao_hint"
+            android:text="@{descricao}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/descricao_label"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/valor_bottom_barrier"
+            app:layout_constraintWidth_default="spread" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/descricao_bottom_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="descricao_label,descricao_value" />
+
+        <RadioGroup
+            android:id="@+id/pago_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/descricao_bottom_barrier">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{pago}"
+                android:text="@string/pago_label" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/field_to_field_margin"
+                android:checked="@{!pago}"
+                android:text="@string/nao_pago_label" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/finalizar_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:text="@string/finalizar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pago_rg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

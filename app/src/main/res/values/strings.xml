@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">DesafioMobilis</string>
+    <string name="logar">Logar</string>
+    <string name="login">LOGIN</string>
+    <string name="criar">Criar nova despesa</string>
+    <string name="data_label">Data:</string>
+    <string name="valor_label">Valor:</string>
+    <string name="descricao_label">Descrição:</string>
+
+<!--  CriarView  -->
+    <string name="criar_view_nova_despesa_title">Criação de Despesa</string>
+    <string name="criar_view_alteracao_despesa_title">Alteração de Despesa</string>
+    <string name="data_hint">Insira a data</string>
+    <string name="valor_hint">Insira o valor</string>
+    <string name="descricao_hint">Insira a descrição</string>
+
+    <string name="pago_label">Pago</string>
+    <string name="nao_pago_label">Não Pago</string>
+    <string name="resumo_activity_title">Resumo</string>
+    <string name="finalizar">Finalizar</string>
+</resources>

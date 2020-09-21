@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="String" />
+
+        <variable
+            name="valor"
+            type="String" />
+
+        <variable
+            name="descricao"
+            type="String" />
+
+        <variable
+            name="pago"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/field_to_field_margin">
+
+        <TextView
+            android:id="@+id/data_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/data_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/data_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_to_value_margin"
+            android:text="@{data}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintLeft_toRightOf="@id/data_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="01/01/2020" />
+
+        <TextView
+            android:id="@+id/valor_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/label_to_value_margin"
+            android:text="@string/valor_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@id/data_value"
+            app:layout_constraintRight_toLeftOf="@id/valor_value"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/valor_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{valor}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="R$ 2.000,00" />
+
+        <TextView
+            android:id="@+id/descricao_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/field_to_field_margin"
+            android:text="@string/descricao_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/data_label" />
+
+        <TextView
+            android:id="@+id/descricao_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/label_to_value_margin"
+            android:text="@{descricao}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/descricao_label"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/descricao_label"
+            tools:text="Compra de um martelo" />
+
+        <TextView
+            android:id="@+id/pago_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{pago}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/textColorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descricao_value"
+            tools:text="Pago" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
