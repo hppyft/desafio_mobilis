@@ -8,7 +8,7 @@
     <!--  ResumoView  -->
     <string name="despesas_tab_title">Despesas</string>
     <string name="receitas_tab_title">Receitas</string>
-    <string name="criar">Criar nova despesa</string>
+    <string name="criar">Criar nova movimentação financeira</string>
     <string name="data_label">Data:</string>
     <string name="valor_label">Valor:</string>
     <string name="descricao_label">Descrição:</string>
@@ -36,6 +36,7 @@
 
     <!--  GraficoView  -->
     <string name="erro_grafico">Ocorreu um erro ao resgatar valores para os gráficos</string>
+    <string name="empty_list_text">Esta lista está vazia, experimente adicionar algo clicando no botão abaixo</string>
 
 
 </resources>

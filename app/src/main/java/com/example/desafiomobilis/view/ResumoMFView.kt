@@ -40,6 +40,7 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
 
     override fun onResume() {
         mBinding.list.visibility = View.GONE
+        mBinding.emptyListText.visibility = View.GONE
         mBinding.loading.visibility = View.VISIBLE
         super.onResume()
     }
@@ -54,7 +55,7 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
     }
 
     private fun setupCriarButton() {
-        mBinding.criarBtn.setSafeOnClickListener {
+        mBinding.fab.setSafeOnClickListener {
             getViewModel().onCriarClicked {
                 navigate(
                     CriarActivity::class.java,
@@ -78,7 +79,13 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
         getViewModel().getList().observe(viewLifecycleOwner) {
             adapter.setList(it)
             mBinding.loading.visibility = View.GONE
-            mBinding.list.visibility = View.VISIBLE
+            if (it.isEmpty()) {
+                mBinding.list.visibility = View.GONE
+                mBinding.emptyListText.visibility = View.VISIBLE
+            } else {
+                mBinding.emptyListText.visibility = View.GONE
+                mBinding.list.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -102,6 +109,7 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
                     }
                     R.id.remover_menu_option -> {
                         mBinding.list.visibility = View.GONE
+                        mBinding.emptyListText.visibility = View.GONE
                         mBinding.loading.visibility = View.VISIBLE
                         getViewModel().onRemoverClicked(id)
                     }
@@ -123,6 +131,7 @@ abstract class ResumoMFView<T : MovimentacaoFinanceira> : Fragment() {
                 ResumoMFViewModel.ERROR_GET_LIST -> {
                     mBinding.errorText = getErrorText()
                     mBinding.list.visibility = View.GONE
+                    mBinding.emptyListText.visibility = View.GONE
                     mBinding.errorGroup.visibility = View.VISIBLE
                 }
             }

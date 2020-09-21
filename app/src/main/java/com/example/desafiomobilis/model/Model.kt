@@ -8,7 +8,6 @@ abstract class MovimentacaoFinanceira() {
     var descricao: String? = null
     var data: Date? = null
     var efetuado: Boolean? = null
-    var anexo: String? = null
 
     abstract fun getEfetuadoString(): String
     abstract fun getNaoEfetuadoString(): String
